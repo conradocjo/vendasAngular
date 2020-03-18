@@ -8,6 +8,7 @@ import { Ofertas } from '../shared/ofertas';
   styleUrls: ['./home.component.css'],
   providers: [OfertasService]
 })
+
 export class HomeComponent implements OnInit {
 
   public ofertas: Ofertas[]
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
         (ofertas: Ofertas[]) => { this.ofertas = ofertas },
       )
       .catch((parametros: any) => { console.log(parametros) })
+
   }
 
 }
