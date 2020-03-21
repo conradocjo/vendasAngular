@@ -11,8 +11,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class OfertaComponent implements OnInit {
 
   public ofertaSelecionada: Ofertas;
-  public ofertas: Ofertas[];
-  public teste:Params;
 
   constructor(private ofertaService: OfertasService, private rota: ActivatedRoute) { }
 
@@ -20,20 +18,10 @@ export class OfertaComponent implements OnInit {
     var idItemSelecionado = this.rota.snapshot.params['id'];
 
     this.ofertaService.retornaOfertaPorId(idItemSelecionado)
-    .then((ofertas:Ofertas[])=>{
-      this.ofertas = ofertas
-    })
-    
-    // this.rota.params.subscribe((x)=>{
-    //   this.teste = x;
-    // })
-
-    // this.ofertaService.retornaOfertaPorId(this.teste.id)
-    // .then((ofertas:Ofertas[])=>{
-    //   this.ofertas = ofertas
-    // })
-
-   
+      .then((oferta: Ofertas) => {
+        console.log(oferta)
+        this.ofertaSelecionada = oferta
+      })
 
   }
 }
