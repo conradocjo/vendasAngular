@@ -29,7 +29,7 @@ export class OfertasService {
 
   }
 
-  retornaOfertaPorId(id: string): Promise<Ofertas> {
+  retornaOfertaPorId(id: string): Promise<Ofertas[]> {
     return this.http.get(`http://localhost:3000/ofertas?id=${id}`).toPromise()
       .then((resposta) => resposta.json())
   }

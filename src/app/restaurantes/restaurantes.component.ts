@@ -24,12 +24,4 @@ export class RestaurantesComponent implements OnInit {
       })
   }
 
-  public carregarTela(event: Event): void {
-    this.ofertaServc.retornaOfertaPorId((<HTMLInputElement>event.target).value)
-      .then((oferta: Ofertas) => {
-        this.ofertaSelecEnviada.emit(oferta);
-      })
-
-  }
-
 }
