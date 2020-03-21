@@ -9,7 +9,7 @@
 
   <div class="row" *ngFor='let oferta of ofertas'>
     <div class="col-md-4">
-      <img [src]="oferta.imagens[0].url" />
+      <img [src]="oferta.imagens[0].url" class="img-fluid"/>
     </div>
 
     <div class="col-md-8" >
@@ -30,7 +30,7 @@
       </div>
 
       <div class="row">
-        <button class="btn btn-outline-success">Ver oferta</button>
+        <button [value]="oferta.id" (click)="carregarTela($event)" routerLink="/ofertas" class="btn btn-outline-success">Ver oferta</button>
       </div>
     </div>
   </div>

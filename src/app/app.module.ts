@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { DiversaoComponent } from './diversao/diversao.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
 import { OfertasService } from './ofertas.service';
+import { OfertaComponent } from './oferta/oferta.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { OfertasService } from './ofertas.service';
     HomeComponent,
     RodapeComponent,
     DiversaoComponent,
-    RestaurantesComponent
+    RestaurantesComponent,
+    OfertaComponent
   ],
   imports: [
     BrowserModule,

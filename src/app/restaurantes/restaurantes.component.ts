@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
 import { Ofertas } from '../shared/ofertas';
 
@@ -10,16 +10,26 @@ import { Ofertas } from '../shared/ofertas';
 
 export class RestaurantesComponent implements OnInit {
 
-  ofertas:Ofertas[];
+
+  @Output() public ofertaSelecEnviada: EventEmitter<Ofertas> = new EventEmitter();
+
+  ofertas: Ofertas[];
 
   constructor(private ofertaServc: OfertasService) { }
 
   ngOnInit() {
     this.ofertaServc.retornaCategoria('RESTAURANTES')
-    .then((ofertas:Ofertas[])=>{
-      this.ofertas = ofertas
-      console.log(ofertas);
-    })
+      .then((ofertas: Ofertas[]) => {
+        this.ofertas = ofertas
+      })
+  }
+
+  public carregarTela(event: Event): void {
+    this.ofertaServc.retornaOfertaPorId((<HTMLInputElement>event.target).value)
+      .then((oferta: Ofertas) => {
+        this.ofertaSelecEnviada.emit(oferta);
+      })
+
   }
 
 }
