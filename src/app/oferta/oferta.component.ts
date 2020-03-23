@@ -12,14 +12,15 @@ export class OfertaComponent implements OnInit {
 
   public ofertaSelecionada: Ofertas;
 
-  constructor(private ofertaService: OfertasService, private rota: ActivatedRoute) { }
+  constructor(
+    private ofertaService: OfertasService, 
+    private rota: ActivatedRoute) { }
 
   ngOnInit() {
     var idItemSelecionado = this.rota.snapshot.params['id'];
 
     this.ofertaService.retornaOfertaPorId(idItemSelecionado)
       .then((oferta: Ofertas) => {
-        console.log(oferta)
         this.ofertaSelecionada = oferta
       })
 

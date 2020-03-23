@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="oferta">
+  <div class="ofertaSelecionada" *ngIf="ofertaSelecionada !== undefined">
 
     <div class="row">
       <div class="col">
-        <h4>{{ofertaSelecionada.descricao_oferta}}</h4>
+        <h4>{{ ofertaSelecionada.descricao_ofertaSelecionada }}</h4>
       </div>
     </div>
 
@@ -23,12 +23,12 @@
           <div class="col text-center">
             <p>Por apenas</p>
           </div>
-
+          
         </div>
 
         <div class="row">
           <div class="col text-center">
-            <h1>R$ {{ofertaSelecionada.valor}}</h1>
+            <h1>{{ ofertaSelecionada.valor }}</h1>
           </div>
         </div>
 
@@ -37,10 +37,11 @@
             <button type="button" class="btn btn-warning btn-lg">Adicionar ao carrinho</button>
           </div>
         </div>
-
+          
       </div>
 
     </div>
 
   </div>
+  <br /><br />
 </div>
