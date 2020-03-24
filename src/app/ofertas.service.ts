@@ -33,7 +33,7 @@ export class OfertasService {
   }
 
   retornaOfertaPorId(id: string): Promise<Ofertas> {
-    return this.http.get(`${this.urlApi}ofertas?id=${id}`).toPromise()
+    return this.http.get(`${this.urlApi}?id=${id}`).toPromise()
       .then((resposta) => {
         return resposta.json()[0]
       })
