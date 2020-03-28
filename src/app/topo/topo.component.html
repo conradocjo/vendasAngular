@@ -4,7 +4,16 @@
       <a routerLink="/home" class="navbar-brand">
         <img src="/assets/logo.png" />
       </a>
-      <a a href="#"><img src="/assets/carrinho.png" /></a>
+
+      <div class="row">
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Pesquise por ofertas ..." (keyup)="pesquisar($event)">
+        </div>
+        <div class="col-sm-2">
+          <a a href="#"><img src="/assets/carrinho.png" /></a>
+        </div>
+      </div>
+
     </div>
   </nav>
 
