@@ -13,7 +13,7 @@ export class TopoComponent implements OnInit {
   }
 
   pesquisar(evento: any) {
-    console.log(evento.target.value)
+    console.log(evento)
   }
 
 }
