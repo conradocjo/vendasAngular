@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OfertasService } from 'src/app/ofertas.service';
 
 @Component({
   selector: 'vnd-como-usar',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComoUsarComponent implements OnInit {
 
-  constructor() { }
+  private comoUsarDescricao: string;
+
+
+  constructor(
+    private rota: ActivatedRoute,
+    private serviceOfertas: OfertasService
+
+  ) { }
 
   ngOnInit() {
+    this.serviceOfertas.retornaDescricaoComoUsar(this.rota.parent.snapshot.params['id']).then(x => {
+      this.comoUsarDescricao = x
+    })
   }
+
 
 }

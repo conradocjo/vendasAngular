@@ -11,7 +11,7 @@ export class OfertasService {
   constructor(private http: Http) { }
 
   getOfertas(): Promise<Ofertas[]> {
-    return this.http.get(`${this.urlApi}?destaque=true`).toPromise()
+    return this.http.get(`${this.urlApi}/ofertas?destaque=true`).toPromise()
       .then((resposta) => {
         return resposta.json()
       })
@@ -19,12 +19,12 @@ export class OfertasService {
 
   retornaCategoria(categoria: String): Promise<Ofertas[]> {
     if (categoria === 'DIVERSAO') {
-      return this.http.get(`${this.urlApi}?categoria=diversao`).toPromise()
+      return this.http.get(`${this.urlApi}/ofertas?categoria=diversao`).toPromise()
         .then((resposta) => {
           return resposta.json()
         })
     } else if (categoria === 'RESTAURANTES') {
-      return this.http.get(`${this.urlApi}?categoria=restaurante`).toPromise()
+      return this.http.get(`${this.urlApi}/ofertas?categoria=restaurante`).toPromise()
         .then((resposta) => {
           return resposta.json()
         })
@@ -33,11 +33,24 @@ export class OfertasService {
   }
 
   retornaOfertaPorId(id: string): Promise<Ofertas> {
-    return this.http.get(`${this.urlApi}?id=${id}`).toPromise()
+    return this.http.get(`${this.urlApi}/ofertas?id=${id}`).toPromise()
       .then((resposta) => {
         return resposta.json()[0]
       })
   }
 
+  retornaDescricaoComoUsar(id: string): Promise<string> {
+    return this.http.get(`${this.urlApi}/como-usar?id=${id}`).toPromise()
+      .then((resposta) => {
+        return resposta.json()[0].descricao
+      })
+  }
+
+  retornaLocalidadeDasOfertasPorId(id:string):Promise<string> {
+    return this.http.get(`${this.urlApi}/onde-fica?id=${id}`).toPromise()
+    .then((retorno)=>{
+      return retorno.json()[0].descricao
+    })
+  }
 
 }

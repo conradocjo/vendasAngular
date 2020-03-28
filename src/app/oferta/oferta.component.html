@@ -1,6 +1,7 @@
 <div class="container">
   <div class="ofertaSelecionada" *ngIf="ofertaSelecionada !== undefined">
 
+
     <div class="row">
       <div class="col">
         <h4>{{ ofertaSelecionada.descricao_ofertaSelecionada }}</h4>
@@ -44,22 +45,17 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-          aria-selected="true">Como usar?</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" routerLink="como-usar" role="tab"
+          aria-controls="home" aria-selected="true">Como usar?</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        <a class="nav-link" id="profile-tab" data-toggle="tab" routerLink="onde-fica" role="tab" aria-controls="profile"
           aria-selected="false">Onde fica?</a>
       </li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <p>Como usar ?</p>
-      </div>
-      <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <p>Onde fica ?</p>
-      </div>
+      <router-outlet></router-outlet>
     </div>
 
   </div>
