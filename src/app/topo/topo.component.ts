@@ -25,6 +25,9 @@ export class TopoComponent implements OnInit {
         },
         (error)=>{
           console.log(error)
+        },
+        ()=>{
+          console.log("Aqui se completa o Observable, posso tomar ações neste ponto.")
         }
       )
     }
