@@ -53,4 +53,11 @@ export class OfertasService {
     })
   }
 
+  buscarOfertas(): Promise<Ofertas[]> {
+    return this.http.get(`${this.urlApi}/ofertas`).toPromise()
+    .then((retorno)=>{
+      return retorno.json();
+    })
+  }
+
 }
