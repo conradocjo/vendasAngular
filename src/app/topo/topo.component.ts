@@ -11,12 +11,16 @@ export class TopoComponent implements OnInit {
   constructor(private ofertaService: OfertasService) { }
 
   ngOnInit() {
+    this.ofertaService.buscaTodasOfertas().subscribe(
+      (retorno) => console.log(retorno),
+      (error) => console.log(error)
+    )
   }
 
   pesquisar(pesquisa: string) {
     if (pesquisa.length > 3) {
-      this.ofertaService.buscarOfertas().then((ofertas)=>{
-        ofertas.forEach((x)=>{
+      this.ofertaService.buscarOfertas().then((ofertas) => {
+        ofertas.forEach((x) => {
           if (x.titulo.toLocaleLowerCase().indexOf(pesquisa.toLocaleLowerCase()) != -1) {
             console.log(x.titulo)
           }

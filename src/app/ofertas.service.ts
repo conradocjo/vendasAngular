@@ -1,7 +1,10 @@
-import { Ofertas } from './shared/ofertas';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
 import { URL_API } from '../app/shared/urlApi';
+import { Ofertas } from './shared/ofertas';
+
 
 @Injectable()
 export class OfertasService {
@@ -29,7 +32,6 @@ export class OfertasService {
           return resposta.json()
         })
     }
-
   }
 
   retornaOfertaPorId(id: string): Promise<Ofertas> {
@@ -46,18 +48,24 @@ export class OfertasService {
       })
   }
 
-  retornaLocalidadeDasOfertasPorId(id:string):Promise<string> {
+  retornaLocalidadeDasOfertasPorId(id: string): Promise<string> {
     return this.http.get(`${this.urlApi}/onde-fica?id=${id}`).toPromise()
-    .then((retorno)=>{
-      return retorno.json()[0].descricao
-    })
+      .then((retorno) => {
+        return retorno.json()[0].descricao
+      })
   }
 
   buscarOfertas(): Promise<Ofertas[]> {
     return this.http.get(`${this.urlApi}/ofertas`).toPromise()
-    .then((retorno)=>{
-      return retorno.json();
-    })
+      .then((retorno) => {
+        return retorno.json();
+      })
   }
+
+  buscaTodasOfertas(): Observable<Ofertas[]> {
+    return this.http.get(`${this.urlApi}/ofertas`)
+      .map((resposta) => resposta.json())
+  }
+
 
 }
