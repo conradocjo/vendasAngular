@@ -68,5 +68,11 @@ export class OfertasService {
       .retry(50000)
   }
 
+  buscarOfertaPorDescricao(pesquisa:string):Observable<Ofertas[]> {
+    return this.http.get(`${this.urlApi}/ofertas?descricao_oferta_like=${pesquisa}`)
+    .retry(10)
+    .map((resposta)=> resposta.json())
+  }
+
 
 }

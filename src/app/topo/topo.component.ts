@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
+import { Observable, Subject } from 'rxjs';
+import { Ofertas } from '../shared/ofertas';
+import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/debounceTime'
+
 
 @Component({
   selector: 'vnd-topo',
@@ -8,29 +13,33 @@ import { OfertasService } from '../ofertas.service';
 })
 export class TopoComponent implements OnInit {
 
-  constructor(private ofertaService: OfertasService) { }
+  public ofertas : Observable<Ofertas[]>;
+  public subjectPesquisa: Subject<string> = new Subject<string>()
 
+
+  constructor(private ofertaService: OfertasService) { }
+  /*
+    O switchMap será executado sempre quando método next for disparado.
+    O processo é assincrono. e com switchMap a "memory leak" sequenciando
+    a inscrição do observable, na medida que for havendo a inscrição de novos observables, 
+    os anteriores serão cancelados.
+  */
   ngOnInit() {
+    this.ofertas = this.subjectPesquisa
+    .debounceTime(1000) //Executa a ação do switchMap após 1 ms
+    .switchMap((pesquisa: string)=>{
+      console.log('requisição http para api.')
+      return this.ofertaService.buscarOfertaPorDescricao(pesquisa)
+    })
+    //A partir do subscribe passamos olhar para o Observable.
+    this.ofertas.subscribe((ofertas)=>{
+      console.log(ofertas)
+    })
   }
 
   pesquisar(pesquisa:string){
-    if (pesquisa.length > 3) {
-      this.ofertaService.buscaTodasOfertas().subscribe(
-        (retorno)=>{
-          retorno.forEach((x) => {
-            if (x.titulo.toLocaleLowerCase().indexOf(pesquisa.toLocaleLowerCase()) != -1) {
-              console.log(x.titulo)
-            }
-          })
-        },
-        (error)=>{
-          console.log(error)
-        },
-        ()=>{
-          console.log("Aqui se completa o Observable, posso tomar ações neste ponto.")
-        }
-      )
-    }
+    console.log(pesquisa);
+    this.subjectPesquisa.next(pesquisa)
   }
 
 }
