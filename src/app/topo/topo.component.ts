@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
-import { Observable, Subject } from 'rxjs';
 import { Ofertas } from '../shared/ofertas';
+import { Subject, Observable } from 'rxjs';
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounceTime'
+import 'rxjs/add/operator/distinctUntilChanged'
+import 'rxjs/add/operator/catch'
+import 'rxjs/add/observable/of'
 
 
 @Component({
@@ -13,9 +16,8 @@ import 'rxjs/add/operator/debounceTime'
 })
 export class TopoComponent implements OnInit {
 
-  public ofertas : Observable<Ofertas[]>;
-  public subjectPesquisa: Subject<string> = new Subject<string>()
-
+  private pesquisaSubject: Subject<string> = new Subject<string>();
+  private ofertas: Observable<Ofertas[]>;
 
   constructor(private ofertaService: OfertasService) { }
   /*
@@ -25,21 +27,27 @@ export class TopoComponent implements OnInit {
     os anteriores serão cancelados.
   */
   ngOnInit() {
-    this.ofertas = this.subjectPesquisa
-    .debounceTime(1000) //Executa a ação do switchMap após 1 ms
-    .switchMap((pesquisa: string)=>{
-      console.log('requisição http para api.')
-      return this.ofertaService.buscarOfertaPorDescricao(pesquisa)
+    this.ofertas = this.pesquisaSubject
+    .debounceTime(1000)
+    .distinctUntilChanged()
+    .switchMap((val)=>{
+      if (val.trim() === '') {
+        return Observable.of<Ofertas[]>([])
+      }
+      return this.ofertaService.buscarOfertaPorDescricao(val);
+    }).catch((erro)=>{
+      console.log(`Erro ${erro}`)
+      return new Observable()
     })
-    //A partir do subscribe passamos olhar para o Observable.
-    this.ofertas.subscribe((ofertas)=>{
-      console.log(ofertas)
+
+    this.ofertas.subscribe((pesquisa)=>{
+      console.log(pesquisa)
     })
   }
 
+
   pesquisar(pesquisa:string){
-    console.log(pesquisa);
-    this.subjectPesquisa.next(pesquisa)
+    this.pesquisaSubject.next(pesquisa)
   }
 
 }
