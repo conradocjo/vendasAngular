@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
 import { Ofertas } from '../shared/ofertas';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/debounceTime'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -17,9 +17,11 @@ import 'rxjs/add/observable/of'
 export class TopoComponent implements OnInit {
 
   private pesquisaSubject: Subject<string> = new Subject<string>();
-  private ofertas: Observable<Ofertas[]>;
+  private ofertas: Ofertas[];
+  private observableOfertas: Observable<Ofertas[]>;
 
   constructor(private ofertaService: OfertasService) { }
+  
   /*
     O switchMap será executado sempre quando método next for disparado.
     O processo é assincrono. e com switchMap a "memory leak" sequenciando
@@ -27,8 +29,8 @@ export class TopoComponent implements OnInit {
     os anteriores serão cancelados.
   */
   ngOnInit() {
-    this.ofertas = this.pesquisaSubject
-    .debounceTime(1000)
+    this.observableOfertas = this.pesquisaSubject
+    .debounceTime(300)
     .distinctUntilChanged()
     .switchMap((val)=>{
       if (val.trim() === '') {
@@ -40,14 +42,19 @@ export class TopoComponent implements OnInit {
       return new Observable()
     })
 
-    this.ofertas.subscribe((pesquisa)=>{
-      console.log(pesquisa)
+    this.observableOfertas.subscribe((pesquisa)=>{
+      this.ofertas = pesquisa;
+      console.log(this.ofertas)
     })
   }
 
 
   pesquisar(pesquisa:string){
     this.pesquisaSubject.next(pesquisa)
+  }
+
+  limparBusca() {
+    this.ofertas = null
   }
 
 }
