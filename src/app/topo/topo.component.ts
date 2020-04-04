@@ -2,11 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
 import { Ofertas } from '../shared/ofertas';
 import { Subject, Observable, Subscription } from 'rxjs';
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/operator/debounceTime'
-import 'rxjs/add/operator/distinctUntilChanged'
-import 'rxjs/add/operator/catch'
-import 'rxjs/add/observable/of'
+import '../shared/imports_rxjs'
 
 
 @Component({
@@ -47,7 +43,6 @@ export class TopoComponent implements OnInit {
       console.log(this.ofertas)
     })
   }
-
 
   pesquisar(pesquisa:string){
     this.pesquisaSubject.next(pesquisa)
