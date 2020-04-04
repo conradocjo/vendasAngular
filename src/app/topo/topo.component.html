@@ -7,9 +7,11 @@
 
       <div class="row">
         <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="Pesquise por ofertas ..." #pesquisaUsuario (keyup)="pesquisar(pesquisaUsuario.value)">
-          <ul class="list-group" style="position: absolute;" >
-            <li class="list-group-item" style="width: 262px;" *ngFor='let oferta of ofertas' [routerLink]="['/ofertas',oferta.id]">{{oferta.titulo}}</li>
+          <input type="text" class="form-control" placeholder="Pesquise por ofertas ..." #pesquisaUsuario
+            (keyup)="pesquisar(pesquisaUsuario.value)">
+          <ul class="list-group" style="position: absolute;">
+            <li class="list-group-item" style="width: 262px;" *ngFor='let oferta of ofertas'
+              [routerLink]="['/ofertas',oferta.id]">{{oferta.titulo | uppercase}}</li>
           </ul>
         </div>
         <div class="col-sm-2">
