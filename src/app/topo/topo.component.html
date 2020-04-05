@@ -11,7 +11,7 @@
             (keyup)="pesquisar(pesquisaUsuario.value)">
           <ul class="list-group" style="position: absolute;">
             <li class="list-group-item" style="width: 262px;" *ngFor='let oferta of ofertas'
-              [routerLink]="['/ofertas',oferta.id]">{{oferta.titulo | descricaoReduzida}}</li>
+              [routerLink]="['/ofertas',oferta.id]">{{oferta.titulo | descricaoReduzida :0 :15}}</li>
           </ul>
         </div>
         <div class="col-sm-2">
