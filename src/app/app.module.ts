@@ -33,6 +33,7 @@ import { DescricaoReduzidaPipe } from './shared/descricao-reduzida-pipe';
     ComoUsarComponent,
     OndeFicaComponent,
     DescricaoReduzidaPipe
+    
   ],
   imports: [
     BrowserModule,
