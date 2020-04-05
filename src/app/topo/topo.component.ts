@@ -37,11 +37,6 @@ export class TopoComponent implements OnInit {
       console.log(`Erro ${erro}`)
       return new Observable()
     })
-
-    this.observableOfertas.subscribe((pesquisa)=>{
-      this.ofertas = pesquisa;
-      console.log(this.ofertas)
-    })
   }
 
   pesquisar(pesquisa:string){
