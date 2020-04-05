@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { OfertasService } from '../ofertas.service';
 import { Ofertas } from '../shared/ofertas';
 
@@ -17,12 +17,13 @@ export class OfertaComponent implements OnInit, OnDestroy {
     private rota: ActivatedRoute) { }
 
   ngOnInit() {
-    var idItemSelecionado = this.rota.snapshot.params['id'];
-
-    this.ofertaService.retornaOfertaPorId(idItemSelecionado)
+    // var idItemSelecionado = this.rota.snapshot.params['id'];
+    this.rota.params.subscribe((param: Params)=>{
+      this.ofertaService.retornaOfertaPorId(param.id)
       .then((oferta: Ofertas) => {
         this.ofertaSelecionada = oferta
       })
+    })
   }
 
   ngOnDestroy(): void {

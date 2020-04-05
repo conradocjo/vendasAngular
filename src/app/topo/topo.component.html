@@ -10,7 +10,7 @@
           <input type="text" class="form-control" placeholder="Pesquise por ofertas ..." #pesquisaUsuario
             (keyup)="pesquisar(pesquisaUsuario.value)">
           <ul class="list-group" style="position: absolute;">
-            <li class="list-group-item" style="width: 262px;" *ngFor='let oferta of observableOfertas | async'
+            <li class="list-group-item" style="width: 262px;" (click)="limparBusca()" *ngFor='let oferta of observableOfertas | async'
               [routerLink]="['/ofertas',oferta.id]">{{oferta.titulo | descricaoReduzida :0 :13 | uppercase}}</li>
           </ul>
         </div>

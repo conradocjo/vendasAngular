@@ -13,7 +13,6 @@ import '../shared/imports_rxjs'
 export class TopoComponent implements OnInit {
 
   private pesquisaSubject: Subject<string> = new Subject<string>();
-  private ofertas: Ofertas[];
   private observableOfertas: Observable<Ofertas[]>;
 
   constructor(private ofertaService: OfertasService) { }
@@ -44,7 +43,7 @@ export class TopoComponent implements OnInit {
   }
 
   limparBusca() {
-    this.ofertas = null
+    this.pesquisaSubject.next('')
   }
 
 }

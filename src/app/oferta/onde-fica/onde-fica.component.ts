@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfertasService } from 'src/app/ofertas.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'vnd-onde-fica',
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OndeFicaComponent implements OnInit {
 
-  private ondeFica :string
+  private ondeFica: string
 
   constructor(
     private ofertaService: OfertasService,
@@ -18,9 +18,11 @@ export class OndeFicaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ofertaService.retornaLocalidadeDasOfertasPorId(this.rota.parent.snapshot.params['id'])
-    .then(x=>{
-      this.ondeFica = x
+    this.rota.parent.params.subscribe((param: Params) => {
+      this.ofertaService.retornaLocalidadeDasOfertasPorId(param.id)
+        .then(x => {
+          this.ondeFica = x
+        })
     })
   }
 
