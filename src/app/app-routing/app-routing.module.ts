@@ -6,6 +6,7 @@ import { HomeComponent } from '../home/home.component';
 import { OfertaComponent } from '../oferta/oferta.component';
 import { ComoUsarComponent } from '../oferta/como-usar/como-usar.component';
 import { OndeFicaComponent } from '../oferta/onde-fica/onde-fica.component';
+import { OrdemCompraComponent } from '../ordem-compra/ordem-compra.component';
 
 const ROUTES: Routes = [
   { path: 'diversao', component: DiversaoComponent },
@@ -18,7 +19,8 @@ const ROUTES: Routes = [
       { path: 'como-usar', component: ComoUsarComponent },
       { path: 'onde-fica', component:OndeFicaComponent }
     ]
-  }
+  },
+  { path: 'ordem-compra', component: OrdemCompraComponent}
 ]
 
 @NgModule({
