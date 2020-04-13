@@ -11,6 +11,8 @@ export class OfertasService {
 
   private urlApi: string = URL_API
 
+  private teste: string = 'http://localhost:8080/clientes/buscar/1'
+
   constructor(private http: Http) { }
 
   getOfertas(): Promise<Ofertas[]> {
@@ -71,6 +73,19 @@ export class OfertasService {
   buscarOfertaPorDescricao(pesquisa:string):Observable<Ofertas[]> {
     return this.http.get(`${this.urlApi}/ofertas?descricao_oferta_like=${pesquisa}`)
     .retry(10)
+    .map((resposta)=> resposta.json())
+  }
+
+  buscarTeste():Promise<any> {
+    debugger
+    return this.http.get(this.teste).toPromise()
+      .then((retorno)=>{
+        return retorno.json()
+      })
+  }
+
+  buscarT():Observable<any[]> {
+    return this.http.get(this.teste)
     .map((resposta)=> resposta.json())
   }
 

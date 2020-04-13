@@ -24,6 +24,12 @@ export class TopoComponent implements OnInit {
     os anteriores serão cancelados.
   */
   ngOnInit() {
+    
+    this.ofertaService.buscarT().subscribe((resposta)=>{
+      console.log(resposta)
+    })
+    
+
     this.observableOfertas = this.pesquisaSubject
     .debounceTime(300)
     .distinctUntilChanged()

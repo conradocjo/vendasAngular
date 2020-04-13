@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ordem-compra">
-    <form>
-    
+    <form novalidate>
+
       <h5>Sua Compra</h5>
       <hr />
 
@@ -29,7 +29,7 @@
           29.90
         </div>
       </div>
-      
+
       <div class="form-row" style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
         <div class="form-group col-sm-1">
           <img src="/assets/ofertas/4/img1.jpg" class="img-fluid">
@@ -54,7 +54,7 @@
           31.90
         </div>
       </div>
-      
+
       <div class="form-row">
         <div class="form-group col d-flex justify-content-end">
           <h4>Total do pedido: 61.80</h4>
@@ -68,19 +68,33 @@
 
       <div class="form-row">
 
+
         <div class="form-group col-md-6">
-          <input type="text" class="form-control is-invalid" placeholder="Endereço" autocomplete="off" minlength="5" required>
-          <div class="invalid-feedback">Endereço inválido</div>
+          <input [value]="endereco" #ender (keyup)="atualizaEndereco(ender.value)" type="text"
+            class="form-control {{ estadoIncialEndereco ? '' : enderecoIsValid ? 'is-valid' : 'is-invalid' }}"
+            placeholder="Endereço" autocomplete="off" minlength="5" required>
+          <div *ngIf="!estadoIncialEndereco && !enderecoIsValid">
+            <small class="form-text text-danger">Endereço inválido</small>
+          </div>
         </div>
 
         <div class="form-group col-md-2">
-          <input type="text" class="form-control is-valid" placeholder="Número" autocomplete="off" minlength="1" required>
+          <input [value]="numero" #nmr (input)="atualizaNumero(nmr.value)" type="text"
+            class="form-control {{ estadoInicialNumero ? '' : numeroIsValid ? 'is-valid' : 'is-invalid' }}"
+            placeholder="Número" autocomplete="off" minlength="1" required>
           <br />
-          <small class="form-text text-muted">Ok</small>
+          <div *ngIf="!estadoInicialNumero && !numeroIsValid">
+            <small class="form-text text-danger">Número inválido</small>
+          </div>
         </div>
 
         <div class="form-group col-md-4">
-          <input type="text" class="form-control" placeholder="Complemento" autocomplete="off">
+          <input [value]="complemento" #compl (input)="atualizaComplemento(compl.value)" type="text"
+            class="form-control  {{ estadoInicialComplemento ? '' :  complementoIsValid ? 'is-valid' : 'is-invalid'}}"
+            placeholder="Complemento" autocomplete="off">
+          <div *ngIf="!estadoInicialComplemento && !complementoIsValid">
+            <small class="form-text text-danger">Complemento inválido.</small>
+          </div>
         </div>
 
       </div>
@@ -90,14 +104,18 @@
       <hr />
 
       <div class="form-row">
-          
-        <div class="form-group col-md-3">
-          <select class="form-control is-invalid">
-            <option>Selecione uma opção</option>
-            <option>Dinheiro</option>
-            <option>Débito</option>
-          </select>
 
+        <div class="form-group col-md-3">
+          <select
+            class="form-control {{ estadoInicialFormaPagamento ? '' : formaPagamentoIsValid ? 'is-valid' : 'is-invalid'}}"
+            #frmPgmt (change)="atualizarFormaPagamento(frmPgmt.value)">
+            <option value="">Selecione uma opção</option>
+            <option value="dinheiro" selected="{{ formaPagamento == 'dinheiro' ? true : false }}">Dinheiro</option>
+            <option value="debito" selected="{{ formaPagamento == 'debito' ? true : false }}">Débito</option>
+          </select>
+          <div *ngIf="!estadoInicialFormaPagamento && !formaPagamentoIsValid">
+            <small class="form-text text-danger">Forma de pagamento inválida.</small>
+          </div>
           <div class="invalid-feedback">Selecione uma forma de pagamento</div>
         </div>
       </div>
