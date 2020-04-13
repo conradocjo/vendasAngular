@@ -22,6 +22,8 @@ export class OrdemCompraComponent implements OnInit {
   public estadoInicialComplemento: boolean;
   public estadoInicialFormaPagamento: boolean;
 
+  public estadoBotao: string;
+
   constructor() {
     this.iniciarVariaveis();
   }
@@ -37,7 +39,7 @@ export class OrdemCompraComponent implements OnInit {
     } else {
       this.enderecoIsValid = false;
     }
-    console.log(this.endereco)
+    this.habilitaForm();
   }
 
   atualizaNumero(nmr) {
@@ -46,7 +48,6 @@ export class OrdemCompraComponent implements OnInit {
     var continua = true;
     nmr.split('').forEach(e => {
       var nm = parseInt(e);
-      console.log(nm)
       if (isNaN(nm)) {
         cnt += 1;
       }
@@ -69,7 +70,7 @@ export class OrdemCompraComponent implements OnInit {
       this.numeroIsValid = false;
       cnt = 0;
     }
-    console.log(nmr)
+    this.habilitaForm();
   }
 
   atualizaComplemento(compl) {
@@ -80,7 +81,7 @@ export class OrdemCompraComponent implements OnInit {
     } else {
       this.complementoIsValid = false;
     }
-    console.log(compl)
+    this.habilitaForm();
   }
 
   atualizarFormaPagamento(frmPgmt: string) {
@@ -91,10 +92,12 @@ export class OrdemCompraComponent implements OnInit {
     } else {
       this.formaPagamentoIsValid = false;
     }
-    console.log(this.formaPagamento)
+    this.habilitaForm();
   }
 
   iniciarVariaveis(): void {
+    this.estadoBotao = "disabled";
+
     this.numeroIsValid = false;
     this.enderecoIsValid = false;
     this.complementoIsValid = false;
@@ -104,6 +107,16 @@ export class OrdemCompraComponent implements OnInit {
     this.estadoInicialComplemento = true;
     this.estadoInicialFormaPagamento = true;
     this.estadoInicialNumero = true;
+  }
+
+  habilitaForm(): void {
+    if (this.numeroIsValid == true &&
+      this.enderecoIsValid == true &&
+      this.formaPagamentoIsValid == true) {
+      this.estadoBotao = "";
+    } else {
+      this.estadoBotao = "disabled";
+    }
   }
 
 }
