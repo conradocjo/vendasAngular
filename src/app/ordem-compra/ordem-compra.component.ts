@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../model/pedido';
 
 @Component({
   selector: 'vnd-ordem-compra',
   templateUrl: './ordem-compra.component.html',
-  styleUrls: ['./ordem-compra.component.css']
+  styleUrls: ['./ordem-compra.component.css'],
+  providers: [OrdemCompraService]
 })
 export class OrdemCompraComponent implements OnInit {
 
@@ -11,6 +14,7 @@ export class OrdemCompraComponent implements OnInit {
   public endereco: string = "";
   public complemento: string = "";
   public formaPagamento: string = "";
+  public pedido: Pedido;
 
   public numeroIsValid: boolean;
   public enderecoIsValid: boolean;
@@ -22,9 +26,13 @@ export class OrdemCompraComponent implements OnInit {
   public estadoInicialComplemento: boolean;
   public estadoInicialFormaPagamento: boolean;
 
+  public idPedido: number;
+
   public estadoBotao: string;
 
-  constructor() {
+  constructor(
+    public ordemCompraService: OrdemCompraService
+  ) {
     this.iniciarVariaveis();
   }
 
@@ -117,6 +125,13 @@ export class OrdemCompraComponent implements OnInit {
     } else {
       this.estadoBotao = "disabled";
     }
+  }
+
+  confirmarCompra(): void {
+    this.pedido = new Pedido(this.numero, this.endereco, this.complemento, this.formaPagamento);
+    this.ordemCompraService.efetivarCompra(this.pedido).subscribe((retorno) => {
+      this.idPedido = retorno;
+    });
   }
 
 }
