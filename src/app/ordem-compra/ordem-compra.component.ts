@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../model/pedido';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -19,6 +20,13 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public confirmarCompra(): void {
-    console.log(this.pedido)
+    let pedidoPreenchido:Pedido = new Pedido(this.pedido.value.numero
+      , this.pedido.value.endereco
+      , this.pedido.value.complemento
+      ,this.pedido.value.formaPagamento);
+    
+    this.ordemCompraService.efetivarCompra(pedidoPreenchido).subscribe(()=>{
+      console.log("pedido cadastrado")
+    })
   }
 }
