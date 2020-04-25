@@ -145,6 +145,24 @@
       "endereco": "Rua Rúbia Mara Barbosa",
       "complemento": "t4",
       "id": 2
+    },
+    {
+      "numero": "",
+      "endereco": "",
+      "complemento": "",
+      "id": 3
+    },
+    {
+      "numero": "",
+      "endereco": "",
+      "complemento": "",
+      "id": 4
+    },
+    {
+      "numero": "124",
+      "endereco": "Rua Rúbia Mara Barbosa",
+      "complemento": "casa",
+      "id": 5
     }
   ]
 }
