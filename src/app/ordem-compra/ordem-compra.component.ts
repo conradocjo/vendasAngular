@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service';
-import { Pedido } from '../model/pedido';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -11,24 +10,22 @@ import { Pedido } from '../model/pedido';
 })
 export class OrdemCompraComponent implements OnInit {
 
-  @ViewChild('formulario', { static: false }) pedido: NgForm;
-
-  public idPedidoCompra: number;
+  public formulario: FormGroup = new FormGroup(
+    {
+      "endereco": new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(120)]),
+      "numero": new FormControl(null, [Validators.required]),
+      "complemento": new FormControl(null),
+      "formaPagamento": new FormControl(null, Validators.required)
+    }
+  )
 
   constructor(private ordemCompraService: OrdemCompraService) { }
 
   ngOnInit() {
+
   }
 
   public confirmarCompra(): void {
-    let pedidoPreenchido:Pedido = new Pedido(this.pedido.value.numero
-      , this.pedido.value.endereco
-      , this.pedido.value.complemento
-      ,this.pedido.value.formaPagamento);
-    
-    this.ordemCompraService.efetivarCompra(pedidoPreenchido).subscribe((id)=>{
-      console.log("pedido cadastrado")
-      this.idPedidoCompra = id;
-    })
+    console.log(this.formulario)
   }
 }

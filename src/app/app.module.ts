@@ -16,7 +16,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 
-import {FormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms'
 
 registerLocaleData(ptBr)
 
@@ -44,7 +44,7 @@ import { OrdemCompraSucessoComponent } from './ordem-compra-sucesso/ordem-compra
   imports: [
     BrowserModule,
     HttpModule,
-    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [OfertasService, { provide: LOCALE_ID, useValue: 'pt' }],
