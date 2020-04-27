@@ -12,10 +12,10 @@ export class OrdemCompraComponent implements OnInit {
 
   public formulario: FormGroup = new FormGroup(
     {
-      "endereco": new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(120)]),
-      "numero": new FormControl(null, [Validators.required]),
-      "complemento": new FormControl(null),
-      "formaPagamento": new FormControl(null, Validators.required)
+      "endereco": new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(120)]),
+      "numero": new FormControl('', [Validators.required]),
+      "complemento": new FormControl(''),
+      "formaPagamento": new FormControl('', Validators.required)
     }
   )
 
