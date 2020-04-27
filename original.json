@@ -163,6 +163,20 @@
       "endereco": "Rua Rúbia Mara Barbosa",
       "complemento": "casa",
       "id": 5
+    },
+    {
+      "numero": "[object Object]",
+      "endereco": "[object Object]",
+      "complemento": "[object Object]",
+      "formaPagamento": "[object Object]",
+      "id": 6
+    },
+    {
+      "numero": "123",
+      "endereco": "rua rubia ",
+      "complemento": "dinheiro",
+      "formaPagamento": "asda",
+      "id": 7
     }
   ]
 }

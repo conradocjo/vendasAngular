@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../model/pedido';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -26,6 +27,14 @@ export class OrdemCompraComponent implements OnInit {
   }
 
   public confirmarCompra(): void {
-    console.log(this.formulario)
+    let pedido: Pedido = new Pedido (
+      this.formulario.get('numero').value,
+      this.formulario.get('endereco').value,
+      this.formulario.get('formaPagamento').value,
+      this.formulario.get('complemento').value
+    )
+    this.ordemCompraService.efetivarCompra(pedido).subscribe((id)=>{
+      console.log(id)
+    });
   }
 }
