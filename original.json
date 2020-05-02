@@ -177,6 +177,13 @@
       "complemento": "dinheiro",
       "formaPagamento": "asda",
       "id": 7
+    },
+    {
+      "numero": "45312",
+      "endereco": "Rua rubia mara ",
+      "complemento": "dinheiro",
+      "formaPagamento": "casa",
+      "id": 8
     }
   ]
 }
