@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
+import { map, retry } from "rxjs/operators";
 import { ItemCarrinho } from '../model/itemCarrinho';
 import { BaseService } from './base.service';
 
@@ -11,24 +13,35 @@ export class CarrinhoService extends BaseService {
 
   public itensDoCarrinho: ItemCarrinho[] = [];
 
-  public url: string;
-
   constructor(private http: Http) {
     super();
   }
 
-  // public retornaTodosCargos(): Promise<Cargo[]> {
+  //Itens Abaixo serão refatorados
+  public retornaItensCarrinho(): Promise<ItemCarrinho[]> {
+    return this.http
+      .get(`${this.urlApi}`)
+      .toPromise()
+      .then((retorno) => {
+        return retorno.json();
+      });
+  }
+
+  retornaItens(): Observable<ItemCarrinho[]> {
+    return this.http
+      .get(`${this.urlApi}`)
+      .pipe(map(resultado => resultado.json()), retry(100))
+  }
+
+  // Utilização com HttpBaseService
+
+  // public retornaItensCarrinho(): Promise<ItemCarrinho[]> {
   //   return this.http
-  //     .get<Cargo[]>(`${this.cargoUrl}`)
+  //     .get<ItemCarrinho[]>(`${this.urlApi}`)
   //     .toPromise()
   //     .then((retorno) => {
   //       return retorno;
   //     });
   // }
 
-  // public retornaCargoPorParteDescricao(parteNome:string):Observable<Cargo[]> {
-  //   return this.http
-  //   .get<Cargo[]>(`${this.cargoUrl}/cargosPorParteDescricaoCargo/${parteNome}`)
-  //   .pipe(map(resultado => resultado),retry(100))
-  // }
 }
