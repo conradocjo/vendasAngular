@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import { URL_API } from '../app/shared/urlApi';
-import { Pedido } from './model/pedido';
+import { URL_API } from '../shared/urlApi';
+import { Pedido } from '../model/pedido';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrdemCompraService {
+export class OrdemCompraService extends BaseService {
 
-  private urlApi: string = URL_API
-
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    super();
+  }
 
   public efetivarCompra(pedido: Pedido): Observable<number> {
     let headers: Headers = new Headers();

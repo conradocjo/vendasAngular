@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OfertasService } from 'src/app/ofertas.service';
+import { OfertasService } from 'src/app/services/ofertas.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({

@@ -3,17 +3,16 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
-import { URL_API } from '../app/shared/urlApi';
-import { Ofertas } from './shared/ofertas';
+import { Ofertas } from '../shared/ofertas';
+import { BaseService } from './base.service';
 
 
 @Injectable()
-export class OfertasService {
+export class OfertasService extends BaseService {
 
-  private urlApi: string = URL_API
-
-
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    super();
+  }
 
   getOfertas(): Promise<Ofertas[]> {
     return this.http.get(`${this.urlApi}/ofertas?destaque=true`).toPromise()

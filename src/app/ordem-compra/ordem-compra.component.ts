@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CarrinhoService } from '../services/carrinho.service';
 import { Pedido } from '../model/pedido';
-import { OrdemCompraService } from '../ordem-compra.service';
+import { OrdemCompraService } from '../services/ordem-compra.service';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -22,10 +23,13 @@ export class OrdemCompraComponent implements OnInit {
 
   public idOrdemCompraSucesso: number;
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  constructor(
+    private ordemCompraService: OrdemCompraService,
+    private carrinhoService: CarrinhoService
+  ) { }
 
   ngOnInit() {
-
+    // console.log(this.carrinhoService.retornaListaDeItens());
   }
 
   public confirmarCompra(): void {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OfertasService } from '../ofertas.service';
+import { OfertasService } from '../services/ofertas.service';
 import { Ofertas } from '../shared/ofertas';
 import { Subject, Observable, Subscription } from 'rxjs';
 import '../shared/imports_rxjs'

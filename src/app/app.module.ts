@@ -7,7 +7,7 @@ import { RodapeComponent } from './rodape/rodape.component';
 import { HttpModule } from '@angular/http';
 import { DiversaoComponent } from './diversao/diversao.component';
 import { RestaurantesComponent } from './restaurantes/restaurantes.component';
-import { OfertasService } from './ofertas.service';
+import { OfertasService } from './services/ofertas.service';
 import { OfertaComponent } from './oferta/oferta.component';
 import { OndeFicaComponent } from './oferta/onde-fica/onde-fica.component';
 import { ComoUsarComponent } from './oferta/como-usar/como-usar.component';
