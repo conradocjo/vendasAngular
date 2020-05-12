@@ -36,12 +36,30 @@ export class CarrinhoService extends BaseService {
 
   public adicionarItensAoCarrinho(oferta: Ofertas): void {
     let itemCarrinho: ItemCarrinho = new ItemCarrinho(oferta.id, oferta.imagens[0], oferta.titulo, oferta.descricao_oferta, oferta.valor, 1);
-    this.itensDoCarrinho.push(itemCarrinho);
+    
+    // Variavel itemCarrinhoEncontrado recebe o proprio item, caso o indice atual da lista percorrida seja igual ao item recebido.
+    let itemCarrinhoEncontrado = this.itensDoCarrinho.find((item: ItemCarrinho)=>item.id === itemCarrinho.id)
+    
+    if(itemCarrinhoEncontrado) {
+      itemCarrinhoEncontrado.quantidade += 1;
+    } else {
+      this.itensDoCarrinho.push(itemCarrinho);
+    }
+
+    
     console.log(this.retornaItensTeste());
   }
 
   public retornaItensTeste():Array<ItemCarrinho> {
     return this.itensDoCarrinho;
+  }
+
+  retornaValorTotal(): number {
+    let total = 0;
+    this.itensDoCarrinho.map((item:ItemCarrinho)=>{
+      total = total + (item.quantidade * item.valor)
+    })
+    return total;
   }
 
   // Utilização com HttpBaseService
