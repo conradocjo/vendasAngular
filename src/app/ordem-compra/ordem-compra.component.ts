@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CarrinhoService } from '../services/carrinho.service';
 import { Pedido } from '../model/pedido';
 import { OrdemCompraService } from '../services/ordem-compra.service';
+import { ItemCarrinho } from '../model/itemCarrinho';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -11,6 +12,8 @@ import { OrdemCompraService } from '../services/ordem-compra.service';
   providers: [OrdemCompraService]
 })
 export class OrdemCompraComponent implements OnInit {
+
+  public itens: ItemCarrinho[];
 
   public formulario: FormGroup = new FormGroup(
     {
@@ -29,7 +32,8 @@ export class OrdemCompraComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.carrinhoService.retornaListaDeItens());
+    this.itens = this.carrinhoService.retornaItensTeste();
+    console.log(this.itens)
   }
 
   public confirmarCompra(): void {

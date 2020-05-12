@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { CarrinhoService } from '../services/carrinho.service';
 import { OfertasService } from '../services/ofertas.service';
 import { Ofertas } from '../shared/ofertas';
 
@@ -14,16 +15,22 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private ofertaService: OfertasService,
-    private rota: ActivatedRoute) { }
+    private rota: ActivatedRoute,
+    private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
     // var idItemSelecionado = this.rota.snapshot.params['id'];
-    this.rota.params.subscribe((param: Params)=>{
+    this.rota.params.subscribe((param: Params) => {
       this.ofertaService.retornaOfertaPorId(param.id)
-      .then((oferta: Ofertas) => {
-        this.ofertaSelecionada = oferta
-      })
+        .then((oferta: Ofertas) => {
+          this.ofertaSelecionada = oferta
+        })
     })
+    this.carrinhoService.retornaItensTeste();
+  }
+
+  public adicionarOferta(oferta: Ofertas): void {
+    this.carrinhoService.adicionarItensAoCarrinho(oferta);
   }
 
   ngOnDestroy(): void {
