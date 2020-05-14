@@ -47,4 +47,13 @@ export class OrdemCompraComponent implements OnInit {
       this.idOrdemCompraSucesso = id;
     });
   }
+
+  public adicionarQuantidade(item:ItemCarrinho):void {
+    this.carrinhoService.adicionarQuantidade(item);
+  }
+
+  public removerQuantidade(item:ItemCarrinho):void {
+    this.carrinhoService.removerQuantidade(item);
+   
+  }
 }

@@ -2,40 +2,52 @@
   <div class="ordem-compra" *ngIf="idOrdemCompraSucesso === undefined">
     <form novalidate [formGroup]="formulario" (ngSubmit)="confirmarCompra()">
 
-      <h5>Sua Compra</h5>
-      <hr />
 
-      <div *ngFor="let item of itens" class="form-row"
-        style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
-        <div class="form-group col-sm-1">
-          <img [src]="item.img.url" class="img-fluid">
-        </div>
-        <div class="form-group col-sm-6">
-          {{item.titulo}}
-          <br />
-          Rodízio de Mini-hambúrger com opção de entrada.
-        </div>
 
-        <div>
-          <div class="row">
-            <div class="col">
-              <button type="button" class="btn btn-link">-</button>
-              {{ item.quantidade }}
-              <button type="button" class="btn btn-link">+</button>
+      <div class="compra" *ngIf="carrinhoService.teste().length > 0;else carrinhoVazio">
+        <h5>Sua Compra</h5>
+        <hr />
+        <div *ngFor="let item of itens" class="form-row"
+          style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+          <div class="form-group col-sm-1">
+            <img [src]="item.img.url" class="img-fluid">
+          </div>
+          <div class="form-group col-sm-6">
+            {{item.titulo}}
+            <br />
+            Rodízio de Mini-hambúrger com opção de entrada.
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="col">
+                <button (click)="removerQuantidade(item)" type="button" class="btn btn-link">-</button>
+                {{ item.quantidade }}
+                <button (click)=adicionarQuantidade(item) type="button" class="btn btn-link">+</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="form-group col-sm-3 d-flex justify-content-end">
-          {{item.valor  | currency: 'BRL' : true}}
+          <div class="form-group col-sm-3 d-flex justify-content-end">
+            {{item.valor  | currency: 'BRL' : true}}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col d-flex justify-content-end">
+            <h4>Total do pedido: {{carrinhoService.retornaValorTotal() | currency: 'BRL' : true}}</h4>
+          </div>
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="form-group col d-flex justify-content-end">
-          <h4>Total do pedido: {{carrinhoService.retornaValorTotal() | currency: 'BRL' : true}}</h4>
+      <ng-template #carrinhoVazio 
+        class="form-row d-flex justify-content-end"
+        style="background: #FAFAFA; padding: 20px; border-bottom: solid 1px #F0F0F0">
+        <div>
+          Seu carrinho está vazio, não perca as ofertas.
         </div>
-      </div>
+      </ng-template>
+
+
       <br />
 
       <h5>Dados de entrega</h5>
