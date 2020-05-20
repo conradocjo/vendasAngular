@@ -85,6 +85,10 @@ export class CarrinhoService extends BaseService {
     return total;
   }
 
+  limparCarrinhoDeCompras():void {
+    this.itensDoCarrinho = [];
+  }
+
   // Utilização com HttpBaseService
 
   // public retornaItensCarrinho(): Promise<ItemCarrinho[]> {

@@ -33,7 +33,6 @@ export class OrdemCompraComponent implements OnInit {
 
   ngOnInit() {
     this.itens = this.carrinhoService.retornaItensTeste();
-    console.log(this.itens)
   }
 
   public confirmarCompra(): void {
@@ -47,6 +46,7 @@ export class OrdemCompraComponent implements OnInit {
     if (this.itens.length > 0 && this.formulario.status === "VALID") {
       this.ordemCompraService.efetivarCompra(pedido).subscribe((id) => {
         this.idOrdemCompraSucesso = id;
+        this.carrinhoService.limparCarrinhoDeCompras();
       });
     } else {
       alert("seu carrinho está vazio")
@@ -59,6 +59,7 @@ export class OrdemCompraComponent implements OnInit {
 
   public removerQuantidade(item: ItemCarrinho): void {
     this.carrinhoService.removerQuantidade(item);
-
   }
+
+
 }
