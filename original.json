@@ -191,6 +191,32 @@
       "complemento": "dinheiro",
       "formaPagamento": "teste",
       "id": 9
+    },
+    {
+      "numero": "123",
+      "endereco": "teste",
+      "complemento": "dinheiro",
+      "formaPagamento": "teste",
+      "id": 10
+    },
+    {
+      "numero": "412",
+      "endereco": "Rua dos Gabirobas",
+      "complemento": "dinheiro",
+      "formaPagamento": "casa",
+      "ItensDoCarrinho": [
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricao_oferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 3
+        }
+      ],
+      "id": 11
     }
   ]
 }

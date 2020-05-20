@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, PatternValidator } from '@angular/forms';
 import { CarrinhoService } from '../services/carrinho.service';
 import { Pedido } from '../model/pedido';
 import { OrdemCompraService } from '../services/ordem-compra.service';
@@ -41,19 +41,24 @@ export class OrdemCompraComponent implements OnInit {
       this.formulario.get('numero').value,
       this.formulario.get('endereco').value,
       this.formulario.get('formaPagamento').value,
-      this.formulario.get('complemento').value
+      this.formulario.get('complemento').value,
+      this.itens
     )
-    this.ordemCompraService.efetivarCompra(pedido).subscribe((id) => {
-      this.idOrdemCompraSucesso = id;
-    });
+    if (this.itens.length > 0 && this.formulario.status === "VALID") {
+      this.ordemCompraService.efetivarCompra(pedido).subscribe((id) => {
+        this.idOrdemCompraSucesso = id;
+      });
+    } else {
+      alert("seu carrinho está vazio")
+    }
   }
 
-  public adicionarQuantidade(item:ItemCarrinho):void {
+  public adicionarQuantidade(item: ItemCarrinho): void {
     this.carrinhoService.adicionarQuantidade(item);
   }
 
-  public removerQuantidade(item:ItemCarrinho):void {
+  public removerQuantidade(item: ItemCarrinho): void {
     this.carrinhoService.removerQuantidade(item);
-   
+
   }
 }
