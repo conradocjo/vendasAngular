@@ -27,8 +27,8 @@ export class OrdemCompraComponent implements OnInit {
   public idOrdemCompraSucesso: number;
 
   constructor(
-    private ordemCompraService: OrdemCompraService,
-    private carrinhoService: CarrinhoService
+    public ordemCompraService: OrdemCompraService,
+    public carrinhoService: CarrinhoService
   ) { }
 
   ngOnInit() {

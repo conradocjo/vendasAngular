@@ -9,8 +9,7 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 })
 export class ComoUsarComponent implements OnInit {
 
-  private comoUsarDescricao: string;
-
+  public comoUsarDescricao: string;
 
   constructor(
     private rota: ActivatedRoute,

@@ -12,8 +12,8 @@ import '../shared/imports_rxjs'
 })
 export class TopoComponent implements OnInit {
 
-  private pesquisaSubject: Subject<string> = new Subject<string>();
-  private observableOfertas: Observable<Ofertas[]>;
+  public pesquisaSubject: Subject<string> = new Subject<string>();
+  public observableOfertas: Observable<Ofertas[]>;
 
   constructor(private ofertaService: OfertasService) { }
   

@@ -9,7 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class OndeFicaComponent implements OnInit {
 
-  private ondeFica: string
+  public ondeFica: string
 
   constructor(
     private ofertaService: OfertasService,

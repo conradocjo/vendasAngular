@@ -14,9 +14,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
   public ofertaSelecionada: Ofertas;
 
   constructor(
-    private ofertaService: OfertasService,
-    private rota: ActivatedRoute,
-    private carrinhoService: CarrinhoService) { }
+    public ofertaService: OfertasService,
+    public rota: ActivatedRoute,
+    public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
     // var idItemSelecionado = this.rota.snapshot.params['id'];

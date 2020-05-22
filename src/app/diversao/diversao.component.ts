@@ -10,6 +10,7 @@ import { Ofertas } from '../shared/ofertas';
 export class DiversaoComponent implements OnInit {
 
   public ofertas: Ofertas[]
+  public titulo:string = '';
 
   constructor(private ofertaService: OfertasService) { }
 
